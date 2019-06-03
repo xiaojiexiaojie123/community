@@ -9,7 +9,7 @@ const Register = () => import('./../views/Register/Register')
 const Tour = () => import('./../views/Tour/Tour')
 const News = () => import('./../views/News/News')
 const Movie = () => import('./../views/Movie/Movie')
-const Article = () => import('./../views/Article/Article')
+const Activity = () => import('./../views/Activity/Activity')
 const Community = () => import('./../views/Community/Community')
 const LosePsw = () => import('./../views/LosePsw/LosePsw')
 
@@ -47,8 +47,8 @@ export default new Router({
           component: Community
         },
         {
-          path: 'article',
-          component: Article
+          path: 'activity',
+          component: Activity
         }
       ]
     },

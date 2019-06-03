@@ -5,12 +5,12 @@
     </div>
     <ul>
       <router-link tag="li" to="/layout/index">首页</router-link>
-      <router-link tag="li" to="/layout/index">旅游</router-link>
-      <router-link tag="li" to="/layout/index">新闻</router-link>
-      <router-link tag="li" to="/layout/index">观影视频</router-link>
+      <router-link tag="li" to="/layout/tour">旅游</router-link>
+      <router-link tag="li" to="/layout/news">新闻</router-link>
+      <router-link tag="li" to="/layout/movie">观影视频</router-link>
       <router-link tag="li" to="/layout/index">附近定位</router-link>
-      <router-link tag="li" to="/layout/index">爱心社区</router-link>
-      <router-link tag="li" to="/layout/index">活动发布</router-link>
+      <router-link tag="li" to="/layout/community">爱心社区</router-link>
+      <router-link tag="li" to="/layout/activity">活动发布</router-link>
       <li>
         <router-link to="/login">登录</router-link>
         丨
