@@ -3,124 +3,42 @@
   	<div class="container-fluid city">
       <ul>
         <li>分类：</li>
-        <li>
-          <a href="#">全部</a>
+        <template v-for="(item,index) in configOne">
+        <li @click="getMovieValue(item.typeId)">
+          <a>{{item.typeName}}</a>
         </li>
-        <li>
-          <a href="#">舞蹈</a>
-        </li>
-        <li>
-          <a href="#">绘画</a>
-        </li>
-        <li>
-          <a href="#">棋艺</a>
-        </li>
+        </template>
       </ul>
       <ul>
         <li>风格：</li>
-        <li>
-          <a href="#">全部</a>
+        <template v-for="(item,index) in configTwo">
+        <li @click="getMovieValue(item.typeId)">
+          <a>{{item.typeName}}</a>
         </li>
-        <li>
-          <a href="#">中国风</a>
-        </li>
-        <li>
-          <a href="#">慢节奏</a>
-        </li>
-        <li>
-          <a href="#">快节奏</a>
-        </li>
-        <li>
-          <a href="#">混搭</a>
-        </li>
+        </template>
       </ul>
     </div>
     <div class="ranking">
       <ul>
-        <li>点赞最多</li>
         <li>评论最多</li>
         <li>最新发布</li>
       </ul>
     </div>
-    <div class="con_wrap">
+    <div class="con_wrap" v-for="(item,index) in movieList.pageData">
       <div class="row audio_box">
         <div class="box">
           <img src="image/2.jpg" alt="">
         </div>
-        <div class="img">
-          <img src="image/2.jpg" alt="">
-        </div>
+        <video class="img">
+          <source v-bind:src="item.url" type="video/mp4">
+          您的浏览器不支持 HTML5 video 标签。
+        </video>
         <p class="text-right" style="margin-right: 80px">
-          <span>刘云</span>
-          <span style="margin-left: 10px">5天前</span>
+          <span>{{item.videoTitle}}</span>
+          <span style="margin-left: 10px">发布人：{{item.videoOwer}}</span>
         </p>
         <p class="text-right">
-          <span>赞66</span>
-          <span style="margin-left: 10px">评论99+</span>
-        </p>
-      </div>
-      <div class="row audio_box">
-        <div class="box">
-          <img src="image/2.jpg" alt="">
-        </div>
-        <div class="img">
-          <img src="image/2.jpg" alt="">
-        </div>
-        <p class="text-right" style="margin-right: 80px">
-          <span>刘云</span>
-          <span style="margin-left: 10px">5天前</span>
-        </p>
-        <p class="text-right">
-          <span>赞66</span>
-          <span style="margin-left: 10px">评论99+</span>
-        </p>
-      </div>
-      <div class="row audio_box">
-        <div class="box">
-          <img src="image/2.jpg" alt="">
-        </div>
-        <div class="img">
-          <img src="image/2.jpg" alt="">
-        </div>
-        <p class="text-right" style="margin-right: 80px">
-          <span>刘云</span>
-          <span style="margin-left: 10px">5天前</span>
-        </p>
-        <p class="text-right">
-          <span>赞66</span>
-          <span style="margin-left: 10px">评论99+</span>
-        </p>
-      </div>
-      <div class="row audio_box">
-        <div class="box">
-          <img src="image/2.jpg" alt="">
-        </div>
-        <div class="img">
-          <img src="image/2.jpg" alt="">
-        </div>
-        <p class="text-right" style="margin-right: 80px">
-          <span>刘云</span>
-          <span style="margin-left: 10px">5天前</span>
-        </p>
-        <p class="text-right">
-          <span>赞66</span>
-          <span style="margin-left: 10px">评论99+</span>
-        </p>
-      </div>
-      <div class="row audio_box">
-        <div class="box">
-          <img src="image/2.jpg" alt="">
-        </div>
-        <div class="img">
-          <img src="image/2.jpg" alt="">
-        </div>
-        <p class="text-right" style="margin-right: 80px">
-          <span>刘云</span>
-          <span style="margin-left: 10px">5天前</span>
-        </p>
-        <p class="text-right">
-          <span>赞66</span>
-          <span style="margin-left: 10px">评论99+</span>
+          <span style="margin-left: 10px">评论数：{{item.commentsNum}}</span>
         </p>
       </div>
     </div>
@@ -128,10 +46,56 @@
 </template>
 
 <script>
+import { Message } from 'iview'
+import { getConfig } from '@/api/api'
+import { getMovieAll } from '@/api/api'
 export default {
   name: 'movie',
   data () {
     return {
+      configOne: [],
+      configTwo: [],
+      movieList: []
+    }
+  },
+  mounted:function () {
+    this.getConfigOne(1,3)
+    this.getConfigTwo(2,3)
+    this.getMovieValue(0)
+  },
+  methods: {
+    // 获取列表数据
+    async getConfigOne(level,type){
+      const result = []
+      const data = {
+          level: level,
+          typeOwer: type
+        }
+      const res = await getConfig(data)
+      if (res.code === 0) {
+        this.configOne =  res.data
+      }
+    },
+    // 获取列表数据
+    async getConfigTwo(level,type){
+      const result = []
+      const data = {
+          level: level,
+          typeOwer: type
+        }
+      const res = await getConfig(data)
+      if (res.code === 0) {
+        this.configTwo =  res.data
+      }
+    },
+    //获取数据
+    async getMovieValue(type){
+      
+      const res = await getMovieAll()
+      if (res.code === 0) {
+        console.log(res.data)
+        this.movieList = res.data
+      }
     }
   }
 }

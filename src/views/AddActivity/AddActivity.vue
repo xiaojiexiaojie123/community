@@ -4,27 +4,31 @@
       <div class="top">
         注册
       </div>
-      <div class="username box">
-        <label for="username">用户名:</label>
+      <div class="title box">
+        <label for="title">标题:</label>
         <div class="username-inner input">
-          <input type="text" id="username" name="username" @blur="ValidateUsername" v-model="username">
-          <span v-if="validateUsername" class="validate">用户名不能为空</span>
+          <input type="text" id="title" name="title" @blur="ValidateTitle" v-model="title">
+          <span v-if="validateTitle" class="validate">标题不能为空</span>
         </div>
       </div>
-      <div class="password box">
-        <label for="password">密 &nbsp;&nbsp;&nbsp;码:</label>
+      <div class="type box">
+        <label for="type">活动类型:</label>
         <div class="input">
-          <input type="password" id="password" name="password" @blur="ValidatePassword" v-model="password">
-          <span v-if="validatePassword" class="validate">长度6-16，数字和英文组合</span>
+          <input type="radio" id="love" value="love" v-model="type">
+          <label for="love">爱心社区</label>
+          <input type="radio" id="activity" value="activity" v-model="type">
+          <label for="activity">活动发布</label>
+          <span v-if="validateType" class="validate">类型不能为空</span>
         </div>
       </div>
-      <div class="con-password box">
-        <label for="con-password">确认密码:</label>
+      <div class="time box">
+        <label for="time">活动日期:</label>
         <div class="input">
-          <input type="password" id="con-password" name="con-password" @blur="ValidateConPassword" v-model="conPassword">
-          <span v-if="validateConPassword" class="validate">两次密码输入不一致</span>
+          <input type="text" id="time" name="time" @blur="ValidateTime" v-model="time">
+          <span v-if="validateTime" class="validate">日期不能为空</span>
         </div>
       </div>
+      
       <div class="phone box">
         <label for="phone">手机号码:</label>
         <div class="input">
@@ -33,16 +37,15 @@
           <span v-if="validatePhoneNull" class="validate">请输入手机号码</span>
         </div>
       </div>
-      <div class="email box">
-        <label for="email">邮箱账号:</label>
+      <div class="address box">
+        <label for="address">活动地点:</label>
         <div class="input">
-          <input type="text" id="email" name="email" @blur="ValidateEmail" v-model="email">
-          <span v-if="validateEmail" class="validate">邮箱号码非法</span>
-          <span v-if="validateEmailNull" class="validate">请输入邮箱号码</span>
+          <input type="text" id="address" name="address" @blur="ValidateEmail" v-model="address">
+          <span v-if="validateAddress" class="validate">地点不能为空</span>
         </div>
       </div>
       <div class="btn-foot text-center">
-        <button @click="register" class="btn btn-primary submit" type="button" style="margin-right: 35px">提交</button>
+        <button @click="addActivity" class="btn btn-primary submit" type="button" style="margin-right: 35px">提交</button>
         <router-link tag="a" to="/layout/index" class="btn btn-default" style="border: 1px solid #ccc">返回</router-link>
       </div>
     </div>
@@ -51,53 +54,52 @@
 
 <script>
 import { Message } from 'iview'
-import { loginUp } from '@/api/api'
+import { AddActivity } from '@/api/api'
 export default {
-  name: 'register',
+  name: 'AddActivity',
   data () {
     return {
-      username: '',
-      password: '',
-      conPassword: '',
+      title: '',
+      time: '',
+      type: '',
       phoneNum: '',
-      email: '',
-      validateUsername: '',
-      validatePassword: '',
-      validateConPassword: '',
+      address: '',
+      validateTitle: '',
+      validateTime: '',
+      validateType: '',
       validatePhone: '',
       validatePhoneNull: '',
-      validateEmail: '',
-      validateEmailNull: '',
+      validateAddress: '',
     }
   },
   methods: {
-    // 用户名验证
-    ValidateUsername () {
-      if (this.username === '') {
-        this.validateUsername = true
+    // 标题验证
+    ValidateTitle () {
+      if (this.title === '') {
+        this.validateTitle = true
         return false
       } else {
-        this.validateUsername = false
+        this.validateTitle = false
         return true
       }
     },
-    // 密码验证
-    ValidatePassword () {
-      if (this.password === '' || this.password.length < 6 || this.password.length > 16 || (!/^(?=.*[a-zA-Z]+)(?=.*[0-9]+)[a-zA-Z0-9]+$/.test(this.password))) {
-        this.validatePassword = true
+    // 日期验证
+    ValidateTime () {
+      if (this.time === '') {
+        this.validateTime = true
         return false
       } else {
-        this.validatePassword = false
+        this.validateTime = false
         return true
       }
     },
-    // 确认密码验证
-    ValidateConPassword () {
-      if (this.conPassword !== this.password) {
-        this.validateConPassword = true
+    // 类型验证
+    ValidateType () {
+      if (this.type === '') {
+        this.validateType = true
         return false
       } else {
-        this.validateConPassword = false
+        this.validateType = false
         return true
       }
     },
@@ -116,31 +118,24 @@ export default {
       }
     },
     // 邮箱验证
-    ValidateEmail () {
-      if (this.phoneNum === '') {
-        this.validateEmailNull = true
-        return false
-      } else if (!/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/.test(this.email)) {
-        this.validateEmailNull = false
-        this.validateEmail = true
+    ValidateAddress () {
+      if (this.address === '') {
+        this.validateAddress = true
         return false
       } else {
-        this.validateEmail = false
+        this.validateAddress = false
         return true
       }
     },
-    // 注册
-    async register () {
-      if (this.ValidateUsername() && this.ValidatePassword() && this.ValidateConPassword() && this.ValidatePhone() && this.ValidateEmail()) {
+    // 添加活动
+    async addActivity () {
+      if (this.ValidateTitle() && this.ValidateTime() && this.ValidateType() && this.ValidatePhone() && this.ValidateAddress()) {
         const data = {
-          userName: this.username,
-          userPassword: this.password,
-          userPhoneNumber: this.phoneNum,
-          userId: this.email
+          
         }
-        const res = await loginUp(data)
+        const res = await AddActivity(data)
         if (res.code === 0) {
-          Message.success('注册成功')
+          Message.success('等待审核')
 
           this.$router.replace('/layout/index')
         }

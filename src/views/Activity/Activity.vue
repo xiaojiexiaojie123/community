@@ -3,77 +3,28 @@
   	<div class="container-fluid city">
       <ul>
         <li>分类：</li>
-        <li>
-          <a href="#">全部</a>
+        <template v-for="(item,index) in configOne">
+        <li @click="getActivityValue(item.typeId)">
+          <a>{{item.typeName}}</a>
         </li>
-        <li>
-          <a href="#">广州</a>
-        </li>
-        <li>
-          <a href="#">深圳</a>
-        </li>
-        <li>
-          <a href="#">东莞</a>
-        </li>
+        </template>
       </ul>
       <ul>
         <li>风格：</li>
-        <li>
-          <a href="#">全部</a>
+        <template v-for="(item,index) in configTwo">
+        <li @click="getActivityValue(item.typeId)">
+          <a>{{item.typeName}}</a>
         </li>
-        <li>
-          <a href="#">中国风</a>
-        </li>
-        <li>
-          <a href="#">慢节奏</a>
-        </li>
-        <li>
-          <a href="#">快节奏</a>
-        </li>
-        <li>
-          <a href="#">混搭</a>
-        </li>
+        </template>
       </ul>
     </div>
-    <div class="activity">
+    <div class="activity" v-for="(item,index) in acitvityList.pageData">
       <div class="row activity_box">
-        <h4>活动名称</h4>
-        <p class="col-md-6">活动内容</p>
-        <p class="col-md-6">基本条件</p>
-        <p class="col-md-6">2017-01-01</p>
-        <p class="col-md-6">活动地点</p>
-        <div class="statue">活动中</div>
-      </div>
-      <div class="row activity_box">
-        <h4>活动名称</h4>
-        <p class="col-md-6">活动内容</p>
-        <p class="col-md-6">基本条件</p>
-        <p class="col-md-6">2017-01-01</p>
-        <p class="col-md-6">活动地点</p>
-        <div class="statue">活动中</div>
-      </div>
-      <div class="row activity_box">
-        <h4>活动名称</h4>
-        <p class="col-md-6">活动内容</p>
-        <p class="col-md-6">基本条件</p>
-        <p class="col-md-6">2017-01-01</p>
-        <p class="col-md-6">活动地点</p>
-        <div class="statue">活动中</div>
-      </div>
-      <div class="row activity_box">
-        <h4>活动名称</h4>
-        <p class="col-md-6">活动内容</p>
-        <p class="col-md-6">基本条件</p>
-        <p class="col-md-6">2017-01-01</p>
-        <p class="col-md-6">活动地点</p>
-        <div class="statue">活动中</div>
-      </div>
-      <div class="row activity_box">
-        <h4>活动名称</h4>
-        <p class="col-md-6">活动内容</p>
-        <p class="col-md-6">基本条件</p>
-        <p class="col-md-6">2017-01-01</p>
-        <p class="col-md-6">活动地点</p>
+        <h3><b>活动名称：</b>{{item.activityTitle}}</h3><br />
+        <p class="col-md-6"><strong>活动地点：</strong>{{item.activityAddress}}</p>
+        <p class="col-md-6"><strong>活动时间：</strong>{{item.activityTime}}</p>
+        <p class="col-md-6"><strong>活动发起人：</strong>{{item.activityOwer}}</p>
+        <p class="col-md-6"><strong>联系方式：</strong>{{item.activityPhone}}</p>
         <div class="statue">活动中</div>
       </div>
     </div>
@@ -81,10 +32,58 @@
 </template>
 
 <script>
+import { Message } from 'iview'
+import { getConfig } from '@/api/api'
+import { getActivityAll } from '@/api/api'
 export default {
   name: 'activity',
   data () {
     return {
+      configOne: [],
+      configTwo: [],
+      acitvityList: []
+    }
+  },
+  mounted:function () {
+    this.getConfigOne(1,5)
+    this.getConfigTwo(2,5)
+    this.getActivityValue(0)
+  },
+  methods: {
+    // 获取列表数据
+    async getConfigOne(level,type){
+      const result = []
+      const data = {
+          level: level,
+          typeOwer: type
+        }
+      const res = await getConfig(data)
+      if (res.code === 0) {
+        this.configOne =  res.data
+      }
+    },
+    // 获取列表数据
+    async getConfigTwo(level,type){
+      const result = []
+      const data = {
+          level: level,
+          typeOwer: type
+        }
+      const res = await getConfig(data)
+      if (res.code === 0) {
+        this.configTwo =  res.data
+      }
+    },
+    // 获取数据
+    async getActivityValue(type){
+      const data = {
+          // selectType: type,
+        }
+      const res = await getActivityAll(data)
+      if (res.code === 0) {
+        console.log(res.data)
+        this.acitvityList = res.data
+      }
     }
   }
 }

@@ -13,6 +13,10 @@ const Activity = () => import('./../views/Activity/Activity')
 const Community = () => import('./../views/Community/Community')
 const LosePsw = () => import('./../views/LosePsw/LosePsw')
 
+const ArticleItem = () => import('./../views/ArticleItem/ArticleItem')
+const AddActivity = () => import('./../views/AddActivity/AddActivity')
+const Test = () => import('./../views/Test/Test')
+
 Vue.use(Router)
 
 export default new Router({
@@ -23,6 +27,7 @@ export default new Router({
     },
     {
       path: '/layout',
+      name: 'layout',
       component: Layout,
       redirect: '/layout/index',
       children: [
@@ -49,6 +54,16 @@ export default new Router({
         {
           path: 'activity',
           component: Activity
+        },
+        {
+          path: 'articleItem',
+          name: 'articleItem',
+          component: ArticleItem
+        },
+        {
+          path: 'addActivity',
+          name: 'addActivity',
+          component: AddActivity
         }
       ]
     },
@@ -63,6 +78,10 @@ export default new Router({
     {
       path: '/losePsw',
       component: LosePsw
-    }
+    },
+    {
+      path: '/test',
+      component: Test
+    },
   ]
 })

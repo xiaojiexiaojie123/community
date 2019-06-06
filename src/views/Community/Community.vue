@@ -3,79 +3,44 @@
   	<div class="container-fluid city">
       <ul>
         <li>分类：</li>
-       <li>
-          <a href="#">全部</a>
+        <template v-for="(item,index) in configOne">
+        <li @click="getCommunityValue(item.typeId)">
+          <a>{{item.typeName}}</a>
         </li>
-        <li>
-          <a href="#">广州</a>
-        </li>
-        <li>
-          <a href="#">深圳</a>
-        </li>
-        <li>
-          <a href="#">东莞</a>
-        </li>
+        </template>
       </ul>
       <ul>
         <li>类型：</li>
-        <li>
-          <a href="#">全部</a>
+        <template v-for="(item,index) in configTwo">
+        <li @click="getCommunityValue(item.typeId)">
+          <a>{{item.typeName}}</a>
         </li>
-        <li>
-          <a href="#">义工服务</a>
-        </li>
-        <li>
-          <a href="#">社区互助</a>
-        </li>
+        </template>
       </ul>
     </div>
-    <div class="con_wrap">
+    <div class="con_wrap" v-for="(item,index) in communityList.pageData">
       <div class="community_box">
         <div class="title">
-          <h3>义工服务</h3>
-          <p>广州市/天河区</p>
+          <h3>{{item.loveTitle}}</h3>
+          <p>{{item.loveAddress}}</p>
         </div>
         <div class="date">
-          <p>2018-02-28发布</p>
+          <p>{{item.loveTime}}发布</p>
         </div>
         <div class="enroll">
-          <h5>发起人：黄晓杰</h5>
+          <h5>发起人：{{item.loveOwer}}</h5>
           <p></p>
         </div>
         <div class="difficulty">
           <h5>联系方式</h5>
-          <p>123456789101</p>
+          <p>{{item.lovePhone}}</p>
         </div>
         <div class="require">
           <h5>报名条件</h5>
-          <p>年龄不限，难度不限</p>
+          <p>{{item.loveContent}}</p>
         </div>
         <div class="img">
-          <img src="image/3.jpg" alt="">
-        </div>
-      </div>
-      <div class="community_box">
-        <div class="title">
-          <h3>社区互助</h3>
-          <p>广州市/天河区</p>
-        </div>
-        <div class="date">
-          <p>2018-02-28发布</p>
-        </div>
-        <div class="enroll">
-          <h5>发起人：黄晓杰</h5>
-          <p></p>
-        </div>
-        <div class="difficulty">
-          <h5>联系方式</h5>
-          <p>123456789101</p>
-        </div>
-        <div class="require">
-          <h5>报名条件</h5>
-          <p>年龄不限，难度不限</p>
-        </div>
-        <div class="img">
-          <img src="image/3.jpg" alt="">
+          <img v-bind:src="item.lovePic" alt="">
         </div>
       </div>
     </div>
@@ -83,10 +48,59 @@
 </template>
 
 <script>
+import { Message } from 'iview'
+import { getConfig } from '@/api/api'
+import { getCommunityAll } from '@/api/api'
 export default {
   name: 'community',
   data () {
     return {
+      configOne: [],
+      configTwo: [],
+      communityList: []
+    }
+  },
+  mounted:function () {
+    this.getConfigOne(1,4)
+    this.getConfigTwo(2,4)
+    this.getCommunityValue(0)
+  },
+  methods: {
+    // 获取列表数据
+    async getConfigOne(level,type){
+      const result = []
+      const data = {
+          level: level,
+          typeOwer: type
+        }
+      const res = await getConfig(data)
+      if (res.code === 0) {
+        this.configOne =  res.data
+      }
+    },
+    // 获取列表数据
+    async getConfigTwo(level,type){
+      const result = []
+      const data = {
+          level: level,
+          typeOwer: type
+        }
+      const res = await getConfig(data)
+      if (res.code === 0) {
+        this.configTwo =  res.data
+      }
+    },
+    //获取数据
+    async getCommunityValue(type){
+      const data = {
+          selectType: type,
+          lovestatus: 1,
+        }
+      const res = await getCommunityAll(data)
+      if (res.code === 0) {
+        console.log(res.data)
+        this.communityList = res.data
+      }
     }
   }
 }

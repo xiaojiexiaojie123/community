@@ -1,4 +1,5 @@
 <template>
+
   <div class="index">
   	      <!-- 轮播 -->
       <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -47,201 +48,55 @@
       <div class="content">
         <h4 class="text-center">精品活动</h4>
         <p class="text-center" style="line-height: 14px">交友学习两不误</p>
-        <div class="activity">
+        <div class="activity" v-for="(item,index) in activityList.pageData">
           <div class="row activity_box">
-            <h4>活动名称</h4>
-            <p class="col-md-6">活动内容</p>
-            <p class="col-md-6">基本条件</p>
-            <p class="col-md-6">2017-01-01</p>
-            <p class="col-md-6">参加人数</p>
-            <div class="statue">活动中</div>
-          </div>
-          <div class="row activity_box">
-            <h4>活动名称</h4>
-            <p class="col-md-6">活动内容</p>
-            <p class="col-md-6">基本条件</p>
-            <p class="col-md-6">2017-01-01</p>
-            <p class="col-md-6">参加人数</p>
-            <div class="statue">活动中</div>
-          </div>
-          <div class="row activity_box">
-            <h4>活动名称</h4>
-            <p class="col-md-6">活动内容</p>
-            <p class="col-md-6">基本条件</p>
-            <p class="col-md-6">2017-01-01</p>
-            <p class="col-md-6">参加人数</p>
-            <div class="statue">活动中</div>
-          </div>
-          <div class="row activity_box">
-            <h4>活动名称</h4>
-            <p class="col-md-6">活动内容</p>
-            <p class="col-md-6">基本条件</p>
-            <p class="col-md-6">2017-01-01</p>
-            <p class="col-md-6">参加人数</p>
-            <div class="statue">活动中</div>
-          </div>
-          <div class="row activity_box">
-            <h4>活动名称</h4>
-            <p class="col-md-6">活动内容</p>
-            <p class="col-md-6">基本条件</p>
-            <p class="col-md-6">2017-01-01</p>
-            <p class="col-md-6">参加人数</p>
+            <h3><b>活动名称：</b>{{item.activityTitle}}</h3><br />
+            <p class="col-md-6"><strong>活动地点：</strong>{{item.activityAddress}}</p>
+            <p class="col-md-6"><strong>活动时间：</strong>{{item.activityTime}}</p>
+            <p class="col-md-6"><strong>活动发起人：</strong>{{item.activityOwer}}</p>
+            <p class="col-md-6"><strong>联系方式：</strong>{{item.activityPhone}}</p>
             <div class="statue">活动中</div>
           </div>
         </div>
       </div>
-      <!-- 社区交流圈 -->
-      <div class="content">
-        <h4 class="text-center">社区交流圈</h4>
-        <p class="text-center" style="line-height: 14px">当你需要，我在你身边</p>
-        <div class="activity">
-          <div class="row community_box">
-            <h4 class="text-center">社区名称</h4>
-            <p class="text-center">负责人：XXX</p>
-            <p class="text-center">线下活跃度：50%</p>
-            <p class="text-center">总人数</p>
-            <p class="text-center">参加人数</p>
-            <div class="img">
-              <img src="image/2.jpg" alt="">
-            </div>
-          </div>
-          <div class="row community_box">
-            <h4 class="text-center">社区名称</h4>
-            <p class="text-center">负责人：XXX</p>
-            <p class="text-center">线下活跃度：50%</p>
-            <p class="text-center">总人数</p>
-            <p class="text-center">参加人数</p>
-            <div class="img">
-              <img src="image/2.jpg" alt="">
-            </div>
-          </div>
-          <div class="row community_box">
-            <h4 class="text-center">社区名称</h4>
-            <p class="text-center">负责人：XXX</p>
-            <p class="text-center">线下活跃度：50%</p>
-            <p class="text-center">总人数</p>
-            <p class="text-center">参加人数</p>
-            <div class="img">
-              <img src="image/2.jpg" alt="">
-            </div>
-          </div>
-          <div class="row community_box">
-            <h4 class="text-center">社区名称</h4>
-            <p class="text-center">负责人：XXX</p>
-            <p class="text-center">线下活跃度：50%</p>
-            <p class="text-center">总人数</p>
-            <p class="text-center">参加人数</p>
-            <div class="img">
-              <img src="image/2.jpg" alt="">
-            </div>
-          </div>
-          <div class="row community_box">
-            <h4 class="text-center">社区名称</h4>
-            <p class="text-center">负责人：XXX</p>
-            <p class="text-center">线下活跃度：50%</p>
-            <p class="text-center">总人数</p>
-            <p class="text-center">参加人数</p>
-            <div class="img">
-              <img src="image/2.jpg" alt="">
-            </div>
-          </div>
-        </div>
-      </div>
+      
       <!-- 热门视频 -->
       <div class="content">
         <h4 class="text-center">热门视频</h4>
         <p class="text-center" style="line-height: 14px">生活在于乐趣</p>
         <div class="category">
+          <!--
           <ul>
             <li><a href="#">舞蹈</a></li>
             <li><a href="#">棋艺</a></li>
             <li><a href="#">绘画</a></li>
             <li><a href="#">混杂</a></li>
           </ul>
+          -->
         </div>
-        <div class="audio">
+        <div class="audio con_wrap">
+        <template v-for="(item,index) in movieList.pageData">
           <div class="row audio_box">
             <div class="box">
               <img src="image/2.jpg" alt="">
             </div>
-            <div class="img">
-              <img src="image/2.jpg" alt="">
-            </div>
+            <video class="img">
+              <source v-bind:src="item.url" type="video/mp4">
+              您的浏览器不支持 HTML5 video 标签。
+            </video>
             <p class="text-right" style="margin-right: 80px">
-              <span>刘云</span>
-              <span style="margin-left: 10px">5天前</span>
+              <span>{{item.videoTitle}}</span>
+              <span style="margin-left: 10px">发布人：{{item.videoOwer}}</span>
             </p>
             <p class="text-right">
-              <span>赞66</span>
-              <span style="margin-left: 10px">评论99+</span>
+              <span style="margin-left: 10px">评论数：{{item.commentsNum}}</span>
             </p>
           </div>
-          <div class="row audio_box">
-            <div class="box">
-              <img src="image/2.jpg" alt="">
-            </div>
-            <div class="img">
-              <img src="image/2.jpg" alt="">
-            </div>
-            <p class="text-right" style="margin-right: 80px">
-              <span>刘云</span>
-              <span style="margin-left: 10px">5天前</span>
-            </p>
-            <p class="text-right">
-              <span>赞66</span>
-              <span style="margin-left: 10px">评论99+</span>
-            </p>
-          </div>
-          <div class="row audio_box">
-            <div class="box">
-              <img src="image/2.jpg" alt="">
-            </div>
-            <div class="img">
-              <img src="image/2.jpg" alt="">
-            </div>
-            <p class="text-right" style="margin-right: 80px">
-              <span>刘云</span>
-              <span style="margin-left: 10px">5天前</span>
-            </p>
-            <p class="text-right">
-              <span>赞66</span>
-              <span style="margin-left: 10px">评论99+</span>
-            </p>
-          </div>
-          <div class="row audio_box">
-            <div class="box">
-              <img src="image/2.jpg" alt="">
-            </div>
-            <div class="img">
-              <img src="image/2.jpg" alt="">
-            </div>
-            <p class="text-right" style="margin-right: 80px">
-              <span>刘云</span>
-              <span style="margin-left: 10px">5天前</span>
-            </p>
-            <p class="text-right">
-              <span>赞66</span>
-              <span style="margin-left: 10px">评论99+</span>
-            </p>
-          </div>
-          <div class="row audio_box">
-            <div class="box">
-              <img src="image/2.jpg" alt="">
-            </div>
-            <div class="img">
-              <img src="image/2.jpg" alt="">
-            </div>
-            <p class="text-right" style="margin-right: 80px">
-              <span>刘云</span>
-              <span style="margin-left: 10px">5天前</span>
-            </p>
-            <p class="text-right">
-              <span>赞66</span>
-              <span style="margin-left: 10px">评论99+</span>
-            </p>
-          </div>
+        </template>
         </div>
       </div>
+
+
       <!-- 悦生活 -->
       <div class="content">
         <h4 class="text-center">悦生活</h4>
@@ -254,31 +109,37 @@
                 <img src="image/2.jpg" alt="">
               </div>
               <div class="news">
-                <h3>宿舍欠费</h3>
-                <p><strong>摘要：</strong>宿舍欠费啦</p>
+                <h3>{{newsList.newitle}}</h3>
+                <p><strong>摘要：</strong>{{newsList.newDigest}}</p>
               </div>
-              <div class="more">more>></div>
+              <router-link :to="{ path: 'articleItem', query: { type: 'news', Id: newsList.newId }}">
+              more>>
+              </router-link>
             </div>
             <div class="right">
               <div class="news">
                 <div class="img">
-                  <img src="image/3.jpg" alt="">
+                  <img v-bind:src="newsList.newPic" alt="">
                 </div>
                 <div class="con">
-                  <h3>旅游</h3>
-                  <p><strong>摘要</strong></p>
+                  <h3>{{tourList.pageData[0].tourTitle}}</h3>
+                  <p><strong>{{tourList.pageData[0].tourDigest}}</strong></p>
                 </div>
-                <div class="more">more>></div>
+                <router-link :to="{ path: 'articleItem', query: { type: 'tour', Id: tourList.pageData[0].tourId }}">
+              more>>
+              </router-link>
               </div>
               <div class="news">
                   <div class="img">
-                    <img src="image/3.jpg" alt="">
+                    <img v-bind:src="tourList.pageData[0].tourPic" alt="">
                   </div>
                   <div class="con">
-                    <h3>旅游</h3>
-                    <p><strong>摘要</strong></p>
+                    <h3>{{tourList.pageData[1].tourTitle}}</h3>
+                    <p><strong>{{tourList.pageData[1].tourDigest}}</strong></p>
                   </div>
-                  <div class="more">more>></div>
+                  <router-link :to="{ path: 'articleItem', query: { type: 'tour', Id: tourList.pageData[0].tourId }}">
+                  more>>
+                  </router-link>
                 </div>
             </div>
           </div>
@@ -301,46 +162,73 @@
             </div>
             <p class="text-center">自愿者团体名称</p>
           </div>
-          <div class="row partner_box">
-            <div class="img">
-              <img src="image/2.jpg" alt="">
-            </div>
-            <p class="text-center">自愿者团体名称</p>
-          </div>
-          <div class="row partner_box">
-            <div class="img">
-              <img src="image/2.jpg" alt="">
-            </div>
-            <p class="text-center">自愿者团体名称</p>
-          </div>
-          <div class="row partner_box">
-            <div class="img">
-              <img src="image/2.jpg" alt="">
-            </div>
-            <p class="text-center">自愿者团体名称</p>
-          </div>
-          <div class="row partner_box">
-            <div class="img">
-              <img src="image/2.jpg" alt="">
-            </div>
-            <p class="text-center">自愿者团体名称</p>
-          </div>
-          <div class="row partner_box">
-            <div class="img">
-              <img src="image/2.jpg" alt="">
-            </div>
-            <p class="text-center">自愿者团体名称</p>
-          </div>
         </div>
       </div>
   </div>
 </template>
-
 <script>
+import { Message } from 'iview'
+import { getActivityAll } from '@/api/api'
+import { getMovieAll } from '@/api/api'
+import { getNewsAll } from '@/api/api'
+import { getTourAll } from '@/api/api'
 export default {
   name: 'index',
   data () {
     return {
+      activityList: [],
+      movieList: [],
+      newsList: [],
+      tourList: [],
+    }
+  },
+  mounted:function () {
+    this.getActivityValue(0)
+    this.getMovieValue(0)
+    this.getNewsValue(0)
+    this.getTourValue(0)
+  },
+  methods: {
+    // 获取活动数据
+    async getActivityValue(type){
+      const data = {
+          // selectType: type,
+        }
+      const res = await getActivityAll(data)
+      if (res.code === 0) {
+        console.log(res.data)
+        this.activityList = res.data
+      }
+    },
+    //获取视频数据
+    async getMovieValue(type){
+      const res = await getMovieAll()
+      if (res.code === 0) {
+        console.log(res.data)
+        this.movieList = res.data
+      }
+    },
+    // 获取新闻数据
+    async getNewsValue(type){
+      const data = {
+          selectType: type,
+        }
+      const res = await getNewsAll(data)
+      if (res.code === 0) {
+        console.log(res.data)
+        this.newsList = res.data.pageData[0]
+      }
+    },
+    //获取旅游数据
+    async getTourValue(type){
+      const data = {
+          selectType: type,
+        }
+      const res = await getTourAll(data)
+      if (res.code === 0) {
+        console.log(res.data)
+        this.tourList = res.data
+      }
     }
   }
 }

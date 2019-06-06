@@ -2,118 +2,75 @@
   <div class="news">
   	<div class="container-fluid city">
       <ul>
-        <li>
-          <a href="#">全部</a>
+        <template v-for="(item,index) in configOne">
+        <li @click="getNewsValue(item.typeId)">
+          <a>{{item.typeName}}</a>
         </li>
-        <li>
-          <a href="#">军事</a>
-        </li>
-        <li>
-          <a href="#">健康</a>
-        </li>
-        <li>
-          <a href="#">影视</a>
-        </li>
-        <li>
-          <a href="#">文化</a>
-        </li>
-        <li>
-          <a href="#">金融</a>
-        </li>
-        <li>
-          <a href="#">娱乐</a>
-        </li>
+        </template>
       </ul>
     </div>
     <div class="ranking">
       <ul>
-        <li>点赞最多</li>
         <li>评论最多</li>
         <li>最新发布</li>
       </ul>
     </div>
-    <div class="con_wrap">
-      <div class="tour_box">
+    <div class="con_wrap" v-for="(item,index) in newsList.pageData">
+      <router-link :to="{ path: 'articleItem', query: { type: 'news', Id: item.newId }}">
+      <div class="tour_box" v-bind:id="item.newId">
         <div class="img">
-          <img src="image/3.jpg" alt="">
+          <img v-bind:src="item.newPic" alt="">
         </div>
         <div class="con">
-          <h4><a href="article.html">海大真美</a></h4>
-          <p style="line-height: 1.5em"><strong>摘要：</strong>广东海洋大学（Guangdong Ocean University）坐落于海滨城市湛江市，是广东省人民政府和国家海洋局共建的广东省重点建设大学之一，是一所以海洋、水产、食品学科为特色，理、工、农、文、经、管、法、教、艺等学科协调发展，以应用学科为主体的多科性海洋大学。是具有“学士、硕士、博士”完整学位授权体系的大学，也是广东省高水平大学重点学科建设项目高校 [1]  。</p>
+          <h4>{{item.newitle}}</h4>
+          <p style="line-height: 1.5em"><strong>摘要：</strong>{{item.newDigest}}</p>
         </div>
       </div>
-      <div class="tour_box">
-        <div class="img">
-          <img src="image/3.jpg" alt="">
-        </div>
-        <div class="con">
-          <h4><a href="article.html">海大真美</a></h4>
-          <p style="line-height: 1.5em"><strong>摘要：</strong>广东海洋大学（Guangdong Ocean University）坐落于海滨城市湛江市，是广东省人民政府和国家海洋局共建的广东省重点建设大学之一，是一所以海洋、水产、食品学科为特色，理、工、农、文、经、管、法、教、艺等学科协调发展，以应用学科为主体的多科性海洋大学。是具有“学士、硕士、博士”完整学位授权体系的大学，也是广东省高水平大学重点学科建设项目高校 [1]  。</p>
-        </div>
-      </div>
-      <div class="tour_box">
-        <div class="img">
-          <img src="image/3.jpg" alt="">
-        </div>
-        <div class="con">
-          <h4><a href="article.html">海大真美</a></h4>
-          <p style="line-height: 1.5em"><strong>摘要：</strong>广东海洋大学（Guangdong Ocean University）坐落于海滨城市湛江市，是广东省人民政府和国家海洋局共建的广东省重点建设大学之一，是一所以海洋、水产、食品学科为特色，理、工、农、文、经、管、法、教、艺等学科协调发展，以应用学科为主体的多科性海洋大学。是具有“学士、硕士、博士”完整学位授权体系的大学，也是广东省高水平大学重点学科建设项目高校 [1]  。</p>
-        </div>
-      </div>
-      <div class="tour_box">
-        <div class="img">
-          <img src="image/3.jpg" alt="">
-        </div>
-        <div class="con">
-          <h4><a href="article.html">海大真美</a></h4>
-          <p style="line-height: 1.5em"><strong>摘要：</strong>广东海洋大学（Guangdong Ocean University）坐落于海滨城市湛江市，是广东省人民政府和国家海洋局共建的广东省重点建设大学之一，是一所以海洋、水产、食品学科为特色，理、工、农、文、经、管、法、教、艺等学科协调发展，以应用学科为主体的多科性海洋大学。是具有“学士、硕士、博士”完整学位授权体系的大学，也是广东省高水平大学重点学科建设项目高校 [1]  。</p>
-        </div>
-      </div>
-      <div class="tour_box">
-        <div class="img">
-          <img src="image/3.jpg" alt="">
-        </div>
-        <div class="con">
-          <h4><a href="article.html">海大真美</a></h4>
-          <p style="line-height: 1.5em"><strong>摘要：</strong>广东海洋大学（Guangdong Ocean University）坐落于海滨城市湛江市，是广东省人民政府和国家海洋局共建的广东省重点建设大学之一，是一所以海洋、水产、食品学科为特色，理、工、农、文、经、管、法、教、艺等学科协调发展，以应用学科为主体的多科性海洋大学。是具有“学士、硕士、博士”完整学位授权体系的大学，也是广东省高水平大学重点学科建设项目高校 [1]  。</p>
-        </div>
-      </div>
-      <div class="tour_box">
-        <div class="img">
-          <img src="image/3.jpg" alt="">
-        </div>
-        <div class="con">
-          <h4><a href="article.html">海大真美</a></h4>
-          <p style="line-height: 1.5em"><strong>摘要：</strong>广东海洋大学（Guangdong Ocean University）坐落于海滨城市湛江市，是广东省人民政府和国家海洋局共建的广东省重点建设大学之一，是一所以海洋、水产、食品学科为特色，理、工、农、文、经、管、法、教、艺等学科协调发展，以应用学科为主体的多科性海洋大学。是具有“学士、硕士、博士”完整学位授权体系的大学，也是广东省高水平大学重点学科建设项目高校 [1]  。</p>
-        </div>
-      </div>
-      <div class="tour_box">
-        <div class="img">
-          <img src="image/3.jpg" alt="">
-        </div>
-        <div class="con">
-          <h4><a href="article.html">海大真美</a></h4>
-          <p style="line-height: 1.5em"><strong>摘要：</strong>广东海洋大学（Guangdong Ocean University）坐落于海滨城市湛江市，是广东省人民政府和国家海洋局共建的广东省重点建设大学之一，是一所以海洋、水产、食品学科为特色，理、工、农、文、经、管、法、教、艺等学科协调发展，以应用学科为主体的多科性海洋大学。是具有“学士、硕士、博士”完整学位授权体系的大学，也是广东省高水平大学重点学科建设项目高校 [1]  。</p>
-        </div>
-      </div>
-      <div class="tour_box">
-        <div class="img">
-          <img src="image/3.jpg" alt="">
-        </div>
-        <div class="con">
-          <h4><a href="article.html">海大真美</a></h4>
-          <p style="line-height: 1.5em"><strong>摘要：</strong>广东海洋大学（Guangdong Ocean University）坐落于海滨城市湛江市，是广东省人民政府和国家海洋局共建的广东省重点建设大学之一，是一所以海洋、水产、食品学科为特色，理、工、农、文、经、管、法、教、艺等学科协调发展，以应用学科为主体的多科性海洋大学。是具有“学士、硕士、博士”完整学位授权体系的大学，也是广东省高水平大学重点学科建设项目高校 [1]  。</p>
-        </div>
-      </div>
+      </router-link>
     </div>
+    
   </div>
 </template>
 
 <script>
+import { Message } from 'iview'
+import { getConfig } from '@/api/api'
+import { getNewsAll } from '@/api/api'
 export default {
   name: 'news',
   data () {
     return {
+      configOne: [],
+      newsList: []
+    }
+  },
+  mounted:function () {
+    this.getConfig(1,2)
+    this.getNewsValue(0)
+  },
+  methods: {
+    //获取列表数据
+    async getConfig(level,type){
+      const result = []
+      const data = {
+          level: level,
+          typeOwer: type
+        }
+      const res = await getConfig(data)
+      if (res.code === 0) {
+        this.configOne =  res.data
+      }
+    },
+    // 获取数据
+    async getNewsValue(type){
+      const data = {
+          selectType: type,
+        }
+      const res = await getNewsAll(data)
+      if (res.code === 0) {
+        console.log(res.data)
+        this.newsList = res.data
+      }
     }
   }
 }

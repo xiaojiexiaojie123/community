@@ -25,7 +25,7 @@
           </div>
           <div class="btn-foot text-center">
             <button @click="login" class="btn btn-primary" type="button" style="margin-right: 35px">登录</button>
-            <button href="losePassword.html" class="btn btn-default" type="button">忘记密码</button>
+            <router-link tag="button" to="/losePsw" class="btn btn-default" style="border: 1px solid #ccc">忘记密码</router-link>
           </div>
         </form>
       </div>
@@ -77,6 +77,7 @@ export default {
       }
     },
     toIndex () {
+      // 设置cookie
       this.$router.replace('/layout/index')
     }
   }
