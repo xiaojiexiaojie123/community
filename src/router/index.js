@@ -12,6 +12,7 @@ const Movie = () => import('./../views/Movie/Movie')
 const Article = () => import('./../views/Article/Article')
 const Community = () => import('./../views/Community/Community')
 const LosePsw = () => import('./../views/LosePsw/LosePsw')
+const Position = () => import('./../views/Position/Position')
 
 Vue.use(Router)
 
@@ -24,7 +25,7 @@ export default new Router({
     {
       path: '/layout',
       component: Layout,
-      redirect: '/layout/index',
+      redirect: '/layout/position',
       children: [
         {
           path: 'index',
@@ -49,6 +50,10 @@ export default new Router({
         {
           path: 'article',
           component: Article
+        },
+        {
+          path: 'position',
+          component: Position
         }
       ]
     },
