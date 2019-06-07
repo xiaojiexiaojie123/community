@@ -8,7 +8,7 @@
       <router-link tag="li" to="/layout/tour">旅游</router-link>
       <router-link tag="li" to="/layout/news">新闻</router-link>
       <router-link tag="li" to="/layout/movie">观影视频</router-link>
-      <router-link tag="li" to="/layout/index">附近定位</router-link>
+      <router-link tag="li" to="/layout/position">附近定位</router-link>
       <router-link tag="li" to="/layout/community">爱心社区</router-link>
       <router-link tag="li" to="/layout/activity">活动发布</router-link>
       <li v-if="!isLogin">
