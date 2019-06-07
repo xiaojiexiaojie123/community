@@ -25,7 +25,7 @@
           </div>
           <div class="btn-foot text-center">
             <button @click="login" class="btn btn-primary" type="button" style="margin-right: 35px">登录</button>
-            <button href="losePassword.html" class="btn btn-default" type="button">忘记密码</button>
+            <router-link tag="button" to="/losePsw" class="btn btn-default" style="border: 1px solid #ccc">忘记密码</router-link>
           </div>
         </form>
       </div>
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { login } from '@/api/api'
 export default {
   name: 'login',
   data () {
@@ -66,19 +67,20 @@ export default {
       }
     },
     // 登陆
-    login () {
+    async login () {
       if (this.ValidateUsername() && this.ValidatePassword) {
         const data = {
           userName: this.username,
           userPassword: this.password,
-          callback: this.toIndex
         }
-        this.$store.dispatch('login', data)
+        const res = await login(data)
+        if (res.code === 0) {
+          Message.success('登陆成功')
+          this.$cookie.set('userMessage', res.data, 1);
+          this.$router.replace('/layout/index')
+        }
       }
     },
-    toIndex () {
-      this.$router.replace('/layout/index')
-    }
   }
 }
 </script>

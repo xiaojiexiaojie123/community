@@ -5,18 +5,19 @@
     </div>
     <ul>
       <router-link tag="li" to="/layout/index">首页</router-link>
-      <router-link tag="li" to="/layout/index">旅游</router-link>
-      <router-link tag="li" to="/layout/index">新闻</router-link>
-      <router-link tag="li" to="/layout/index">观影视频</router-link>
+      <router-link tag="li" to="/layout/tour">旅游</router-link>
+      <router-link tag="li" to="/layout/news">新闻</router-link>
+      <router-link tag="li" to="/layout/movie">观影视频</router-link>
       <router-link tag="li" to="/layout/index">附近定位</router-link>
-      <router-link tag="li" to="/layout/index">爱心社区</router-link>
-      <router-link tag="li" to="/layout/index">活动发布</router-link>
-      <li>
+      <router-link tag="li" to="/layout/community">爱心社区</router-link>
+      <router-link tag="li" to="/layout/activity">活动发布</router-link>
+      <li v-if="!isLogin">
         <router-link to="/login">登录</router-link>
         丨
         <router-link to="/register">注册</router-link>
       </li>
-      <router-link tag="li" to="/layout/index">
+      <router-link tag="li" v-if="isLogin">{{userName}}</router-link>
+      <router-link tag="li" v-if="isLogin" to="/layout/addactivity">
         <button class="btn">发布活动</button>
       </router-link>
     </ul>
@@ -28,8 +29,21 @@ export default {
   name: 'navBar',
   data () {
     return {
+      isLogin: false,
+      userName: ''
     }
-  }
+  },
+  mounted:function () {
+    if(this.$cookie.get('userMessage')){
+      this.isLogin = true
+    }
+    else{
+      this.isLogin = false
+    }
+  },
+  methods: {
+    
+  },
 }
 </script>
 

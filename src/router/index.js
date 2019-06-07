@@ -9,10 +9,14 @@ const Register = () => import('./../views/Register/Register')
 const Tour = () => import('./../views/Tour/Tour')
 const News = () => import('./../views/News/News')
 const Movie = () => import('./../views/Movie/Movie')
-const Article = () => import('./../views/Article/Article')
+const Activity = () => import('./../views/Activity/Activity')
 const Community = () => import('./../views/Community/Community')
 const LosePsw = () => import('./../views/LosePsw/LosePsw')
 const Position = () => import('./../views/Position/Position')
+
+const ArticleItem = () => import('./../views/ArticleItem/ArticleItem')
+const AddActivity = () => import('./../views/AddActivity/AddActivity')
+const Test = () => import('./../views/Test/Test')
 
 Vue.use(Router)
 
@@ -24,8 +28,9 @@ export default new Router({
     },
     {
       path: '/layout',
+      name: 'layout',
       component: Layout,
-      redirect: '/layout/position',
+      redirect: '/layout/index',
       children: [
         {
           path: 'index',
@@ -48,8 +53,18 @@ export default new Router({
           component: Community
         },
         {
-          path: 'article',
-          component: Article
+          path: 'activity',
+          component: Activity
+        },
+        {
+          path: 'articleItem',
+          name: 'articleItem',
+          component: ArticleItem
+        },
+        {
+          path: 'addActivity',
+          name: 'addActivity',
+          component: AddActivity
         },
         {
           path: 'position',
@@ -68,6 +83,10 @@ export default new Router({
     {
       path: '/losePsw',
       component: LosePsw
-    }
+    },
+    {
+      path: '/test',
+      component: Test
+    },
   ]
 })
