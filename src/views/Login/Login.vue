@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { login } from '@/api/api'
 export default {
   name: 'login',
   data () {
@@ -66,20 +67,20 @@ export default {
       }
     },
     // 登陆
-    login () {
+    async login () {
       if (this.ValidateUsername() && this.ValidatePassword) {
         const data = {
           userName: this.username,
           userPassword: this.password,
-          callback: this.toIndex
         }
-        this.$store.dispatch('login', data)
+        const res = await login(data)
+        if (res.code === 0) {
+          Message.success('登陆成功')
+          this.$cookie.set('userMessage', res.data, 1);
+          this.$router.replace('/layout/index')
+        }
       }
     },
-    toIndex () {
-      // 设置cookie
-      this.$router.replace('/layout/index')
-    }
   }
 }
 </script>

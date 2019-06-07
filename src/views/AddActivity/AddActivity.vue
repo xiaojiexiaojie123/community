@@ -2,10 +2,10 @@
   <div class="wrap">
     <div class="register">
       <div class="top">
-        注册
+        添加活动
       </div>
       <div class="title box">
-        <label for="title">标题:</label>
+        <label for="title">活动标题:</label>
         <div class="username-inner input">
           <input type="text" id="title" name="title" @blur="ValidateTitle" v-model="title">
           <span v-if="validateTitle" class="validate">标题不能为空</span>
@@ -13,11 +13,11 @@
       </div>
       <div class="type box">
         <label for="type">活动类型:</label>
-        <div class="input">
+        <div class="input" style="width: 187px;height: 23px;">
           <input type="radio" id="love" value="love" v-model="type">
-          <label for="love">爱心社区</label>
+          <span class="small" for="love">爱心社区</span>
           <input type="radio" id="activity" value="activity" v-model="type">
-          <label for="activity">活动发布</label>
+          <span class="small" for="activity">活动发布</span>
           <span v-if="validateType" class="validate">类型不能为空</span>
         </div>
       </div>
@@ -40,7 +40,7 @@
       <div class="address box">
         <label for="address">活动地点:</label>
         <div class="input">
-          <input type="text" id="address" name="address" @blur="ValidateEmail" v-model="address">
+          <input type="text" id="address" name="address" @blur="ValidateAddress" v-model="address">
           <span v-if="validateAddress" class="validate">地点不能为空</span>
         </div>
       </div>
@@ -117,7 +117,7 @@ export default {
         return true
       }
     },
-    // 邮箱验证
+    // 地址验证
     ValidateAddress () {
       if (this.address === '') {
         this.validateAddress = true
@@ -207,6 +207,16 @@ export default {
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-left: 10px;
+}
+#love{
+  width: 10%;
+
+}
+#activity{
+  width: 10%;
+}
+.small{
+  font-size: 1px;
 }
 validate
 .wrap .register .box input:hover{
