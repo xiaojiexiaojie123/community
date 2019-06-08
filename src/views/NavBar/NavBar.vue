@@ -16,7 +16,7 @@
         丨
         <router-link to="/register">注册</router-link>
       </li>
-      <router-link tag="li" v-if="isLogin">{{userName}}</router-link>
+      <router-link tag="li" v-if="isLogin">已登录}</router-link>
       <router-link tag="li" v-if="isLogin" to="/layout/addactivity">
         <button class="btn">发布活动</button>
       </router-link>
@@ -34,7 +34,7 @@ export default {
     }
   },
   mounted:function () {
-    if(this.$cookie.get('userMessage')){
+    if(this.$cookies.isKey('userMessage')){
       this.isLogin = true
     }
     else{
