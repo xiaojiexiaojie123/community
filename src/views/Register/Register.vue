@@ -67,7 +67,7 @@ export default {
       validatePhone: '',
       validatePhoneNull: '',
       validateEmail: '',
-      validateEmailNull: '',
+      validateEmailNull: ''
     }
   },
   methods: {

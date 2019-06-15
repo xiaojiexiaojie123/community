@@ -71,16 +71,17 @@ export default {
       if (this.ValidateUsername() && this.ValidatePassword) {
         const data = {
           userName: this.username,
-          userPassword: this.password,
+          userPassword: this.password
         }
+        // this.$store.dispatch('login', data)
         const res = await login(data)
+        // console.log(res, 'res')
         if (res.code === 0) {
-          Message.success('登陆成功')
-          this.$cookie.set('userMessage', res.data, 1);
+          localStorage.setItem('userinfo', JSON.stringify(res.data))
           this.$router.replace('/layout/index')
         }
       }
-    },
+    }
   }
 }
 </script>

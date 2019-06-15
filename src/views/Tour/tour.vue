@@ -9,7 +9,7 @@
         </li>
         </template>
       </ul>
-      
+
     </div>
     <div class="ranking">
       <ul>
@@ -34,7 +34,6 @@
 </template>
 
 <script>
-import { Message } from 'iview'
 import { getConfig } from '@/api/api'
 import { getTourAll } from '@/api/api'
 export default {
@@ -52,7 +51,7 @@ export default {
   },
   methods: {
     //获取列表数据
-    async getConfig(level,type){
+    async getConfig (level, type){
       const result = []
       const data = {
           level: level,
@@ -63,7 +62,7 @@ export default {
         this.configOne =  res.data
       }
     },
-    
+
     //获取旅游数据
     async getTourValue(type){
       const data = {

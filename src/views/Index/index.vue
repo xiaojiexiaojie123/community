@@ -1,55 +1,30 @@
 <template>
 
   <div class="index">
-  	      <!-- 轮播 -->
-      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-        </ol>
-      
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox">
-          <div class="item active">
-            <img src="image/1.jpg" alt="..." width="100%">
-            <div class="carousel-caption">
-              ...
-            </div>
-          </div>
-          <div class="item">
-            <img src="image/2.jpg" alt="..." width="100%">
-            <div class="carousel-caption">
-              ...
-            </div>
-          </div>
-          <div class="item">
-              <img src="image/3.jpg" alt="..." width="100%">
-              <!-- <div class="carousel-caption">
-                ...
-              </div> -->
-            </div>
+    <!-- 轮播 -->
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="./image/1.jpg" alt="">
         </div>
-      
-        <!-- Controls -->
-        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
+        <div class="swiper-slide">
+          <img src="./image/2.jpg" alt="">
+        </div>
+        <div class="swiper-slide">
+          <img src="./image/3.jpg" alt="">
+        </div>
       </div>
+      <!-- 如果需要分页器 -->
+      <div class="swiper-pagination"></div>
+    </div>
 
       <!-- 内容 -->
       <!-- 精品活动 -->
       <div class="content">
         <h4 class="text-center">精品活动</h4>
         <p class="text-center" style="line-height: 14px">交友学习两不误</p>
-        <div class="activity" v-for="(item,index) in activityList.pageData">
-          <div class="row activity_box">
+        <div class="activity">
+          <div class="row activity_box"  v-for="(item,index) in activityList.pageData">
             <h3><b>活动名称：</b>{{item.activityTitle}}</h3><br />
             <p class="col-md-6"><strong>活动地点：</strong>{{item.activityAddress}}</p>
             <p class="col-md-6"><strong>活动时间：</strong>{{item.activityTime}}</p>
@@ -59,21 +34,21 @@
           </div>
         </div>
       </div>
-      
+
       <!-- 热门视频 -->
       <div class="content">
         <h4 class="text-center">热门视频</h4>
         <p class="text-center" style="line-height: 14px">生活在于乐趣</p>
-        <div class="category">
-          <!--
-          <ul>
-            <li><a href="#">舞蹈</a></li>
-            <li><a href="#">棋艺</a></li>
-            <li><a href="#">绘画</a></li>
-            <li><a href="#">混杂</a></li>
-          </ul>
-          -->
-        </div>
+<!--        <div class="category">-->
+<!--          &lt;!&ndash;-->
+<!--          <ul>-->
+<!--            <li><a href="#">舞蹈</a></li>-->
+<!--            <li><a href="#">棋艺</a></li>-->
+<!--            <li><a href="#">绘画</a></li>-->
+<!--            <li><a href="#">混杂</a></li>-->
+<!--          </ul>-->
+<!--          &ndash;&gt;-->
+<!--        </div>-->
         <div class="audio con_wrap">
         <template v-for="(item,index) in movieList.pageData">
           <div class="row audio_box">
@@ -117,27 +92,27 @@
               </router-link>
             </div>
             <div class="right">
-              <div class="news">
-                <div class="img">
-                  <img v-bind:src="newsList.newPic" alt="">
-                </div>
-                <div class="con">
-                  <h3>{{tourList.pageData[0].tourTitle}}</h3>
-                  <p><strong>{{tourList.pageData[0].tourDigest}}</strong></p>
-                </div>
-                <router-link :to="{ path: 'articleItem', query: { type: 'tour', Id: tourList.pageData[0].tourId }}">
-              more>>
-              </router-link>
-              </div>
-              <div class="news">
+<!--              <div class="news">-->
+<!--                <div class="img">-->
+<!--                  <img v-bind:src="newsList.newPic" alt="">-->
+<!--                </div>-->
+<!--                <div class="con">-->
+<!--                  <h3>{{tourList.pageData[0].tourTitle}}</h3>-->
+<!--                  <p><strong>{{tourList.pageData[0].tourDigest}}</strong></p>-->
+<!--                </div>-->
+<!--                <router-link :to="{ path: 'articleItem', query: { type: 'tour', Id: tourList.pageData[0].tourId }}">-->
+<!--              more>>-->
+<!--              </router-link>-->
+<!--              </div>-->
+              <div class="news" v-for="(item, index) in tourList.pageData" v-if="index < 2">
                   <div class="img">
-                    <img v-bind:src="tourList.pageData[0].tourPic" alt="">
+                    <img v-bind:src="item.tourPic" alt="">
                   </div>
                   <div class="con">
-                    <h3>{{tourList.pageData[1].tourTitle}}</h3>
-                    <p><strong>{{tourList.pageData[1].tourDigest}}</strong></p>
+                    <h3>{{item.tourTitle}}</h3>
+                    <p><strong>{{item.tourDigest}}</strong></p>
                   </div>
-                  <router-link :to="{ path: 'articleItem', query: { type: 'tour', Id: tourList.pageData[0].tourId }}">
+                  <router-link :to="{ path: 'articleItem', query: { type: 'tour', Id: item.tourId }}">
                   more>>
                   </router-link>
                 </div>
@@ -167,7 +142,7 @@
   </div>
 </template>
 <script>
-import { Message } from 'iview'
+import Swiper from 'swiper'
 import { getActivityAll } from '@/api/api'
 import { getMovieAll } from '@/api/api'
 import { getNewsAll } from '@/api/api'
@@ -176,19 +151,31 @@ export default {
   name: 'index',
   data () {
     return {
-      activityList: [],
-      movieList: [],
+      activityList: {},
+      movieList: {},
       newsList: [],
-      tourList: [],
+      tourList: {}
     }
   },
-  mounted:function () {
-    this.getActivityValue(0)
-    this.getMovieValue(0)
+  mounted () {
+    // this.getActivityValue(0)
+    // this.getMovieValue(0)
     this.getNewsValue(0)
     this.getTourValue(0)
+    this.swiperInit()
   },
   methods: {
+    swiperInit () {
+      this.$nextTick(function () {
+        new Swiper ('.swiper-container', {
+          // autoplay: true,
+          // loop: true,
+          // 如果需要分页器
+          pagination: '.swiper-pagination',
+          autoplay: true/*每隔3秒自动播放*/
+        })
+      })
+    },
     // 获取活动数据
     async getActivityValue(type){
       const data = {
@@ -228,6 +215,7 @@ export default {
       if (res.code === 0) {
         console.log(res.data)
         this.tourList = res.data
+        console.log(this.tourList, 'list')
       }
     }
   }
@@ -235,8 +223,23 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import "./../../../node_modules/swiper/dist/css/swiper.css"
+
 .wrap, .mynav{
   min-width: 1024px;
+}
+.swiper-container {
+  width: 100%;
+  height: auto;
+}
+.swiper-container img {
+  width: 100%;
+}
+.content{
+  margin-bottom: 20px;
+}
+.life{
+  margin-top: 10px;
 }
 .activity::after{
   display: block;
@@ -375,6 +378,7 @@ export default {
   height: 200px;
   display: flex;
   position: relative;
+  flex-direction: row;
 }
 .life_box .right .news:first-child{
   border-bottom: 1px solid rgb(32, 28, 28);

@@ -16,7 +16,7 @@
         丨
         <router-link to="/register">注册</router-link>
       </li>
-      <router-link tag="li" v-if="isLogin">{{userName}}</router-link>
+      <li tag="li" v-if="isLogin">{{userName}}</li>
       <router-link tag="li" v-if="isLogin" to="/layout/addactivity">
         <button class="btn">发布活动</button>
       </router-link>
@@ -33,17 +33,11 @@ export default {
       userName: ''
     }
   },
-  mounted:function () {
-    if(this.$cookie.get('userMessage')){
-      this.isLogin = true
-    }
-    else{
-      this.isLogin = false
-    }
-  },
-  methods: {
-    
-  },
+  mounted () {
+    let userinfo = JSON.parse(localStorage.getItem('userinfo'))
+    this.isLogin = userinfo.userId ? true : false
+    this.userName = userinfo.userName
+  }
 }
 </script>
 
